@@ -1,0 +1,13 @@
+{
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es6",
+    "strict": true,
+    "composite": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "../dist/server"
+  }
+}

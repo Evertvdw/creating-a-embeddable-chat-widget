@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch ./**/*ts --exec ts-node index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0"
+  }
+}

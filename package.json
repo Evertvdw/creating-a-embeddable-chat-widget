@@ -9,11 +9,18 @@
     "portal": "cd ./portal && quasar dev && cd ..",
     "portal:build": "cd ./portal && quasar build && cd ..",
     "widget": "cd ./widget && vite && cd ..",
-    "widget:build": "cd ./widget && vite build && cd .."
+    "widget:build": "cd ./widget && vite build && cd ..",
+    "server": "cd ./server && yarn start && cd ..",
+    "server:build": "cd ./server && yarn build && cd .."
   },
   "workspaces": [
     "./portal",
     "./server",
     "./widget"
-  ]
+  ],
+  "engines": {
+    "node": ">= 16",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
 }
