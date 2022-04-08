@@ -3,6 +3,10 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "johnsoncodehk.volar",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "dariofuzinato.vue-peek",
+    "CoenraadS.bracket-pair-colorizer"
   ],
   "unwantedRecommendations": [
     "octref.vetur",

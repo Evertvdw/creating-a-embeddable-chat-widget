@@ -1,6 +1,4 @@
 {
-    "exclude": ["node_modules", "dist"],
-    "references": [
-        {"path": "./portal"}
-    ]
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "./portal" }, { "path": "./widget" }]
 }

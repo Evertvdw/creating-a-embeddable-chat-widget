@@ -6,7 +6,10 @@
   "private": true,
   "author": "Evert van der Weit",
   "scripts": {
-    "portal": "cd ./portal && quasar dev && cd .."
+    "portal": "cd ./portal && quasar dev && cd ..",
+    "portal:build": "cd ./portal && quasar build && cd ..",
+    "widget": "cd ./widget && vite && cd ..",
+    "widget:build": "cd ./widget && vite build && cd .."
   },
   "workspaces": [
     "./portal",
