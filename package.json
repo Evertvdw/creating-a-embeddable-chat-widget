@@ -3,5 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "author": "Evert van der Weit"
+  "private": true,
+  "author": "Evert van der Weit",
+  "scripts": {
+    "portal": "cd ./portal && quasar dev && cd .."
+  },
+  "workspaces": [
+    "./portal",
+    "./server",
+    "./widget"
+  ]
 }
