@@ -1,0 +1,13 @@
+.DS_Store
+.thumbs.db
+node_modules
+
+# Quasar core related directories
+.quasar
+/dist
+/server/db/*.db*
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
