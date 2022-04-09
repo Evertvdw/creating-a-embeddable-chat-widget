@@ -19,5 +19,6 @@ export default defineConfig({
       fileName: (format) => `widget.${format}.js`,
     },
     outDir: '../dist/widget',
+    emptyOutDir: true,
   },
 });
