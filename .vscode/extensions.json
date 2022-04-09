@@ -5,8 +5,7 @@
     "johnsoncodehk.volar",
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
-    "dariofuzinato.vue-peek",
-    "CoenraadS.bracket-pair-colorizer"
+    "dariofuzinato.vue-peek"
   ],
   "unwantedRecommendations": [
     "octref.vetur",
