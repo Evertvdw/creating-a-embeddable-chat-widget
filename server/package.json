@@ -4,12 +4,14 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon --watch ./**/*ts --exec ts-node index.ts",
-    "build": "tsc"
+    "build": "tsc && copyfiles package.json ../dist"
   },
+  "main": "index.js",
   "dependencies": {
     "express": "^4.17.3"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0"
   }
