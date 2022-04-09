@@ -5,7 +5,10 @@
     "johnsoncodehk.volar",
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
-    "dariofuzinato.vue-peek"
+    "dariofuzinato.vue-peek",
+    "ritwickdey.liveserver",
+    "formulahendry.auto-rename-tag",
+    "Zignd.html-css-class-completion"
   ],
   "unwantedRecommendations": [
     "octref.vetur",
