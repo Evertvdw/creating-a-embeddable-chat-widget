@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const props = defineProps({
   countDefault: {
     type: String,
@@ -8,7 +7,6 @@ const props = defineProps({
 });
 
 const count = ref(parseInt(props.countDefault));
-
 </script>
 
 <script lang="ts">
@@ -18,16 +16,15 @@ const count2 = ref(0);
 
 export default {
   setup() {
-  
+    //
   },
   methods: {
     clicked() {
-      const delta:number = 2;
+      const delta = 2;
       count2.value += delta;
-      console.log(`Called, method clicked() ${count2.value}`)
-      
+      console.log(`Called, method clicked() ${count2.value}`);
     },
-  }  
+  },
 };
 </script>
 
@@ -49,7 +46,7 @@ export default {
 
 <style>
 button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;

@@ -6,6 +6,8 @@
   "private": true,
   "author": "Evert van der Weit",
   "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write .",
     "portal": "cd ./portal && quasar dev && cd ..",
     "portal:build": "cd ./portal && quasar build && cd ..",
     "widget": "cd ./widget && vite && cd ..",
