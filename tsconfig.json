@@ -1,8 +1,8 @@
 {
   "exclude": ["node_modules", "dist"],
   "references": [
-    { "path": "./portal" },
-    { "path": "./widget" },
-    { "path": "./server" }
+    { "path": "./packages/portal" },
+    { "path": "./packages/widget" },
+    { "path": "./packages/server" }
   ]
 }

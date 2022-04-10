@@ -19,9 +19,7 @@
     "production:install": "cd ./dist && yarn -prod"
   },
   "workspaces": [
-    "./portal",
-    "./server",
-    "./widget"
+    "packages/*"
   ],
   "engines": {
     "node": ">= 16",
