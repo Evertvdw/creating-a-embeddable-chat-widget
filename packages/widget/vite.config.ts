@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [vue({ customElement: true })],
   server: {
     port: 4000,
+    open: true,
   },
   build: {
     lib: {

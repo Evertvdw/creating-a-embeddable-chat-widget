@@ -1,6 +1,11 @@
-import { defineCustomElement } from 'vue';
-import myTwoButtons from './components/MyTwoButtons.ce.vue';
+import App from './App.vue';
+import { createPinia } from 'pinia';
+import { defineCustomElement, createApp } from 'vue';
 
-const myBtnsComponent = defineCustomElement(myTwoButtons);
+const app = createApp(App);
 
-customElements.define('mytwo-buttons', myBtnsComponent);
+app.use(createPinia());
+
+const chatWidget = defineCustomElement(App);
+
+customElements.define('chat-widget', chatWidget);
