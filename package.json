@@ -8,14 +8,14 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write .",
-    "portal": "cd ./portal && quasar dev && cd ..",
-    "widget": "cd ./widget && vite && cd ..",
-    "server": "cd ./server && yarn start && cd ..",
+    "portal": "cd ./packages/portal && quasar dev && cd ../..",
+    "widget": "cd ./packages/widget && vite && cd ../..",
+    "server": "cd ./packages/server && yarn start && cd ../..",
     "dev": "npm-run-all --parallel portal server widget",
     "build": "npm-run-all portal:build widget:build server:build",
-    "portal:build": "cd ./portal && quasar build && cd ..",
-    "widget:build": "cd ./widget && vite build && cd ..",
-    "server:build": "cd ./server && yarn build && cd ..",
+    "portal:build": "cd ./packages/portal && quasar build && cd ../..",
+    "widget:build": "cd ./packages/widget && vite build && cd ../..",
+    "server:build": "cd ./packages/server && yarn build && cd ../..",
     "production:install": "cd ./dist && yarn -prod"
   },
   "workspaces": [

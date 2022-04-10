@@ -68,7 +68,7 @@ module.exports = configure(function (/* ctx */) {
       // minify: false,
       // polyfillModulePreload: true,
       // distDir
-      distDir: '../dist/portal',
+      distDir: '../../dist/portal',
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},

@@ -18,7 +18,7 @@ export default defineConfig({
       name: 'chat-widget',
       fileName: (format) => `widget.${format}.js`,
     },
-    outDir: '../dist/widget',
+    outDir: '../../dist/widget',
     emptyOutDir: true,
   },
 });
