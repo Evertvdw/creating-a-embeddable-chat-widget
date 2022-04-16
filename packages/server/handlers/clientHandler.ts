@@ -11,14 +11,15 @@ export default function (io: Server, socket: Socket, db: Database) {
       connected: true,
     };
     db.clients.push(client);
+    io.to('admins').emit('admin:list', db.clients);
 
     socket.on('client:message', (message: Message) => {
       // Add message to DB
       client.messages.push(message);
       // Send message back to client
-      socket.emit('message', message);
+      socket.emit('client:message', message);
       // Send message to all admins
-      io.to('admins').emit('client:message', {
+      io.to('admins').emit('admin:message', {
         id: client.id,
         message,
       });
@@ -26,6 +27,10 @@ export default function (io: Server, socket: Socket, db: Database) {
 
     socket.on('disconnect', () => {
       client.connected = false;
+      io.to('admins').emit('admin:client_status', {
+        id: client.id,
+        status: false,
+      });
     });
   });
 }

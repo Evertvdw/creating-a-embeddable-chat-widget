@@ -16,6 +16,12 @@ export const useClientStore = defineStore('client', {
         client.messages.push(payload.message);
       }
     },
+    SOCKET_client_status(payload: { id: string; status: boolean }) {
+      const client = this.clients.find((c) => c.id === payload.id);
+      if (client) {
+        client.connected = payload.status;
+      }
+    },
     setClientSelected(payload: Client) {
       this.clientSelected = payload;
     },

@@ -2,7 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { Client, Database } from './types';
+import { Database } from './types';
 import admins from './admins';
 import adminHandler from './handlers/adminHandler';
 import clientHandler from './handlers/clientHandler';
@@ -17,24 +17,9 @@ const io = new Server(server, {
   },
 });
 
-const tempList: Client[] = [
-  {
-    id: 'temp',
-    connected: false,
-    messages: [],
-    name: 'John Doe',
-  },
-  {
-    id: 'temp1',
-    connected: true,
-    messages: [],
-    name: 'Jane Doe',
-  },
-];
-
 // Create an in memory 'database'
 const db: Database = {
-  clients: tempList,
+  clients: [],
   admins: admins,
 };
 

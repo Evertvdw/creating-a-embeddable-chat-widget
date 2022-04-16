@@ -9,8 +9,8 @@ export default boot(({ store }) => {
   const clientStore = useClientStore(store);
   socket.emit('admin:add', 'Evert');
   socket.onAny((event: string, ...args) => {
-    if (event.startsWith('client:')) {
-      const eventName = event.slice(7);
+    if (event.startsWith('admin:')) {
+      const eventName = event.slice(6);
       if (Object.hasOwn(clientStore, 'SOCKET_' + eventName)) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error

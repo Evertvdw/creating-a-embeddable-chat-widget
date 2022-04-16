@@ -10,7 +10,7 @@ export default function (io: Server, socket: Socket, db: Database) {
     if (!admin) return socket.disconnect(true);
     admin.connected = true;
 
-    socket.emit('client:list', db.clients);
+    socket.emit('admin:list', db.clients);
 
     socket.on(
       'admin:message',
@@ -20,9 +20,9 @@ export default function (io: Server, socket: Socket, db: Database) {
           // Store message in the DB
           client.messages.push(message);
           // Send message to the client
-          socket.to(client.id).emit('message', message);
+          socket.to(client.id).emit('client:message', message);
           // Send message to all admins
-          io.to('admins').emit('client:message', {
+          io.to('admins').emit('admin:message', {
             id: client.id,
             message,
           });
