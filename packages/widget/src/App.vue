@@ -18,7 +18,7 @@ import io from 'socket.io-client';
 import { onUnmounted, ref } from 'vue';
 import { useSocketStore } from './stores/socket';
 import { AddClient, Message, MessageType } from '../../../types';
-import { faker } from '@faker-js/faker';
+import faker from '@faker-js/faker/locale/en';
 
 const URL = 'http://localhost:5000';
 const socket = io(URL);
