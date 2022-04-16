@@ -18,7 +18,7 @@ export default function (io: Server, socket: Socket, db: Database) {
       // Send message back to client
       socket.emit('message', message);
       // Send message to all admins
-      io.to('admins').emit('message', {
+      io.to('admins').emit('client:message', {
         id: client.id,
         message,
       });

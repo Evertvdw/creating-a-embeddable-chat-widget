@@ -1,10 +1,11 @@
 {
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../types.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es6",
     "strict": true,
+    "rootDir": "../../",
     "composite": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
