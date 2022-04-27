@@ -10,12 +10,14 @@ export default function (io: Server, socket: Socket, db: Database) {
       id: socket.id,
       connected: true,
     };
-    db.clients.push(client);
-    io.to('admins').emit('admin:list', db.clients);
+    db.clients.insert(client);
+    io.to('admins').emit('admin:list', db.clients.find());
 
     socket.on('client:message', (message: Message) => {
       // Add message to DB
       client.messages.push(message);
+      // Update the client as autoupdate wont detect array modifications
+      db.clients.update(client);
       // Send message back to client
       socket.emit('client:message', message);
       // Send message to all admins

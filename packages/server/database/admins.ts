@@ -1,4 +1,4 @@
-import { Admin } from './types';
+import { Admin } from './../types';
 
 const admins: Admin[] = [
   {

@@ -6,7 +6,7 @@ notes.md
 # Quasar core related directories
 .quasar
 /dist
-/server/db/*.db*
+/packages/server/database/*.db*
 
 # Log files
 npm-debug.log*

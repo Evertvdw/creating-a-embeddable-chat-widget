@@ -3,9 +3,9 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { Database } from './types';
-import admins from './admins';
 import adminHandler from './handlers/adminHandler';
 import clientHandler from './handlers/clientHandler';
+import initDB from './database/database';
 
 const app = express();
 app.use(cors());
@@ -16,12 +16,6 @@ const io = new Server(server, {
     origin: [/http:\/\/localhost:\d*/],
   },
 });
-
-// Create an in memory 'database'
-const db: Database = {
-  clients: [],
-  admins: admins,
-};
 
 io.on('connection', (socket) => {
   console.log(
@@ -35,8 +29,17 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(5000, () => {
-  console.log(
-    `Server started on port ${5000} at ${new Date().toLocaleString()}`
-  );
-});
+let db: Database;
+(async function () {
+  try {
+    db = await initDB();
+    server.listen(5000, () => {
+      console.log(
+        `Server started on port ${5000} at ${new Date().toLocaleString()}`
+      );
+    });
+  } catch (err) {
+    console.log('Server failed to start.');
+    console.error(err);
+  }
+})();
