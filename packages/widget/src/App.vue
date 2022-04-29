@@ -45,7 +45,11 @@ const addClient: AddClient = {
   name: socketStore.name,
 };
 
-socket.emit('client:add', addClient);
+// This will be called on the initial connection and also on reconnects
+socket.on('connect', () => {
+  socket.emit('client:add', addClient);
+});
+
 socket.onAny((event: string, ...args) => {
   if (event.startsWith('client:')) {
     const eventName = event.slice(7);

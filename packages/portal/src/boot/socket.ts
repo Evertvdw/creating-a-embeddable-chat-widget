@@ -7,7 +7,12 @@ const socket = io(URL);
 
 export default boot(({ store }) => {
   const clientStore = useClientStore(store);
-  socket.emit('admin:add', 'Evert');
+
+  // This will be called on the initial connection and also on reconnects
+  socket.on('connect', () => {
+    socket.emit('admin:add', 'Evert');
+  });
+
   socket.onAny((event: string, ...args) => {
     if (event.startsWith('admin:')) {
       const eventName = event.slice(6);
