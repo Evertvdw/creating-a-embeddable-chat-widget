@@ -6,6 +6,7 @@ import { Database } from './types';
 import adminHandler from './handlers/adminHandler';
 import clientHandler from './handlers/clientHandler';
 import initDB from './database/database';
+import crypto from 'crypto';
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,21 @@ io.on('connection', (socket) => {
   socket.onAny((event, ...args) => {
     console.log('[DEBUG]', event, args);
   });
+});
+
+// Socket middleware to set a clientID
+const randomId = () => crypto.randomBytes(8).toString('hex');
+io.use((socket, next) => {
+  const clientID = socket.handshake.auth.clientID;
+  if (clientID) {
+    const client = db.clients.findOne({ id: clientID });
+    if (client) {
+      socket.clientID = clientID;
+      return next();
+    }
+  }
+  socket.clientID = randomId();
+  next();
 });
 
 let db: Database;

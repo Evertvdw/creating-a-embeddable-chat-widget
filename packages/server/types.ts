@@ -7,3 +7,9 @@ export interface Database {
 }
 
 export { Admin, Client, Message, AddClient };
+
+declare module 'socket.io' {
+  interface Socket {
+    clientID: string;
+  }
+}

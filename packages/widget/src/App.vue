@@ -1,7 +1,7 @@
 <template>
   <div class="chat-widget">
     Chat-widget
-    <div>Name: {{ name }}</div>
+    <div>Name: {{ socketStore.name }}</div>
     Messages:
     <div class="messages">
       <div v-for="(message, index) in socketStore.messages" :key="index">
@@ -15,19 +15,34 @@
 
 <script setup lang="ts">
 import io from 'socket.io-client';
-import { onUnmounted, ref } from 'vue';
+import { onUnmounted, ref, watch } from 'vue';
 import { useSocketStore } from './stores/socket';
 import { AddClient, Message, MessageType } from '../../../types';
-import faker from '@faker-js/faker/locale/en';
 
 const URL = 'http://localhost:5000';
-const socket = io(URL);
 const socketStore = useSocketStore();
-const name = faker.name.firstName();
+const socket = io(URL, {
+  auth: {
+    clientID: socketStore.id,
+  },
+});
+watch(
+  () => socketStore.id,
+  (val) => {
+    socket.auth = {
+      clientID: val,
+    };
+  }
+);
+
+if (!socketStore.name) {
+  socketStore.setName();
+}
+
 const text = ref('');
 
 const addClient: AddClient = {
-  name,
+  name: socketStore.name,
 };
 
 socket.emit('client:add', addClient);
