@@ -13,7 +13,7 @@
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn outline @click="logout"> Logout </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -30,8 +30,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ClientList from 'src/components/ClientList.vue';
+import { useAuthStore } from 'src/stores/auth';
+import { socket } from 'src/boot/socket';
+import { useRouter } from 'vue-router';
 
 const leftDrawerOpen = ref(false);
+const authStore = useAuthStore();
+const router = useRouter();
+
+function logout() {
+  authStore.logout();
+  socket.disconnect();
+  router.push('/');
+}
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
