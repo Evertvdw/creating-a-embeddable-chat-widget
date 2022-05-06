@@ -10,6 +10,8 @@ import authRoutes from './routes/auth';
 import socketMiddleware from './middleware/socket';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import serveStatic from 'serve-static';
+import history from 'connect-history-api-fallback';
 
 const app = express();
 app.use(helmet());
@@ -21,6 +23,9 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(history());
+app.use(serveStatic('./../../dist/widget'));
+app.use(serveStatic('./../../dist/portal'));
 
 const server = createServer(app);
 const io = new Server(server, {
