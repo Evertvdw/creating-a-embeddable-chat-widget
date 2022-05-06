@@ -6,10 +6,21 @@ import { Database } from './types';
 import adminHandler from './handlers/adminHandler';
 import clientHandler from './handlers/clientHandler';
 import initDB from './database/database';
-import crypto from 'crypto';
+import authRoutes from './routes/auth';
+import socketMiddleware from './middleware/socket';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 
 const app = express();
-app.use(cors());
+app.use(helmet());
+app.use(
+  cors({
+    origin: [/http:\/\/localhost:\d*/],
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(cookieParser());
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -22,7 +33,7 @@ io.on('connection', (socket) => {
   console.log(
     `Socket ${socket.id} connected from origin: ${socket.handshake.headers.origin}`
   );
-  adminHandler(io, socket, db);
+  if (socket.admin) adminHandler(io, socket, db);
   clientHandler(io, socket, db);
 
   socket.onAny((event, ...args) => {
@@ -30,25 +41,14 @@ io.on('connection', (socket) => {
   });
 });
 
-// Socket middleware to set a clientID
-const randomId = () => crypto.randomBytes(8).toString('hex');
-io.use((socket, next) => {
-  const clientID = socket.handshake.auth.clientID;
-  if (clientID) {
-    const client = db.clients.findOne({ id: clientID });
-    if (client) {
-      socket.clientID = clientID;
-      return next();
-    }
-  }
-  socket.clientID = randomId();
-  next();
-});
-
 let db: Database;
 (async function () {
   try {
     db = await initDB();
+
+    socketMiddleware(io, db);
+    app.use('/auth', authRoutes(db));
+
     server.listen(5000, () => {
       console.log(
         `Server started on port ${5000} at ${new Date().toLocaleString()}`
