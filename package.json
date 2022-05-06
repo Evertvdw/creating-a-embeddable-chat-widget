@@ -13,7 +13,7 @@
     "widget": "cd ./packages/widget && vite && cd ../..",
     "server": "cd ./packages/server && yarn start && cd ../..",
     "dev": "npm-run-all --parallel portal server widget",
-    "build": "npm-run-all portal:build widget:build server:build",
+    "build": "npm-run-all portal:build widget:build server:build production:install",
     "portal:build": "cd ./packages/portal && quasar build && cd ../..",
     "widget:build": "cd ./packages/widget && vite build && cd ../..",
     "server:build": "cd ./packages/server && yarn build && cd ../..",
@@ -23,7 +23,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">= 14",
+    "node": "16.x",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   },
