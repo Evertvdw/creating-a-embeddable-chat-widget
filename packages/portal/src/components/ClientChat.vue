@@ -36,7 +36,7 @@
 import { ref } from 'vue';
 import { useClientStore } from 'src/stores/client';
 import { socket } from 'src/boot/socket';
-import { Message, MessageType } from '../../../../types';
+import { Message, MessageType } from 'types';
 
 const clientStore = useClientStore();
 const text = ref('');

@@ -17,7 +17,7 @@
 import io from 'socket.io-client';
 import { onUnmounted, ref, watch } from 'vue';
 import { useSocketStore } from './stores/socket';
-import { AddClient, Message, MessageType } from '../../../types';
+import { AddClient, Message, MessageType } from 'types';
 
 const URL = 'http://localhost:5000';
 const socketStore = useSocketStore();

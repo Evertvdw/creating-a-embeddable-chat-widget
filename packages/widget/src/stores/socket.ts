@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Message } from '../../../../types';
+import { Message } from 'types';
 import faker from '@faker-js/faker/locale/en';
 
 export const useSocketStore = defineStore('socket', {

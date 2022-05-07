@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Client, Message } from '../../../../types';
+import { Client, Message } from 'types';
 
 export const useClientStore = defineStore('client', {
   state: () => ({

@@ -3,6 +3,7 @@
   "references": [
     { "path": "./packages/portal" },
     { "path": "./packages/widget" },
-    { "path": "./packages/server" }
+    { "path": "./packages/server" },
+    { "path": "./packages/types" }
   ]
 }

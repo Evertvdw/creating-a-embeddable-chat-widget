@@ -12,11 +12,13 @@
     "portal": "cd ./packages/portal && quasar dev && cd ../..",
     "widget": "cd ./packages/widget && vite && cd ../..",
     "server": "cd ./packages/server && yarn start && cd ../..",
-    "dev": "npm-run-all --parallel portal server widget",
-    "build": "npm-run-all portal:build widget:build server:build",
+    "types": "cd ./packages/types && yarn start && cd ../..",
+    "dev": "npm-run-all --parallel types portal server widget",
+    "build": "npm-run-all types:build portal:build widget:build server:build",
     "portal:build": "cd ./packages/portal && quasar build && cd ../..",
     "widget:build": "cd ./packages/widget && vite build && cd ../..",
     "server:build": "cd ./packages/server && yarn build && cd ../..",
+    "types:build": "cd ./packages/types && yarn build && cd ../..",
     "production:install": "cd ./dist && yarn -prod"
   },
   "workspaces": [

@@ -10,15 +10,14 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "composite": true,
-    "rootDir": "../../"
+    "composite": true
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "vite.config.ts",
-    "../../types.ts"
-  ]
+    "vite.config.ts"
+  ],
+  "references": [{ "path": "../types" }]
 }

@@ -1,5 +1,5 @@
 import { Collection } from 'lokijs';
-import { Admin, Client, Message, AddClient } from '../../types';
+import { Admin, Client, Message, AddClient } from 'types';
 
 export interface Database {
   clients: Collection<Client>;

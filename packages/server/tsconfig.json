@@ -1,14 +1,14 @@
 {
-  "include": ["**/*.ts", "../../types.ts"],
+  "include": ["**/*.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es6",
     "strict": true,
-    "rootDir": "../../",
     "composite": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "outDir": "../../dist/server"
-  }
+  },
+  "references": [{ "path": "../types" }]
 }
