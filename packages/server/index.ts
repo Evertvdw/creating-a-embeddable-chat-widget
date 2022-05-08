@@ -12,9 +12,12 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import serveStatic from 'serve-static';
 import history from 'connect-history-api-fallback';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+console.log();
 
 app.use(helmet());
 app.use(
@@ -27,8 +30,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(history());
 if (process.env.APP_ENV === 'production') {
-  app.use(serveStatic('../widget'));
-  app.use(serveStatic('../portal'));
+  app.use(serveStatic(path.join(__dirname, './../../dist/widget')));
+  app.use(serveStatic(path.join(__dirname, './../../dist/portal')));
 }
 
 const server = createServer(app);
