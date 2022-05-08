@@ -22,7 +22,7 @@ console.log();
 app.use(helmet());
 app.use(
   cors({
-    origin: [/http:\/\/localhost:\d*/],
+    origin: [/http:\/\/localhost:\d*/, 'https://cdpn.io'],
     credentials: true,
   })
 );
@@ -33,8 +33,6 @@ if (process.env.APP_ENV === 'production') {
   app.use(
     serveStatic(path.join(__dirname, './../../dist/widget'), {
       setHeaders: (res) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
         res.header('Cross-Origin-Resource-Policy', 'cross-origin');
       },
     })
@@ -45,7 +43,7 @@ if (process.env.APP_ENV === 'production') {
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: [/http:\/\/localhost:\d*/],
+    origin: [/http:\/\/localhost:\d*/, 'https://cdpn.io'],
   },
 });
 
