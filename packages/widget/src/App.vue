@@ -19,7 +19,7 @@ import { onUnmounted, ref, watch } from 'vue';
 import { useSocketStore } from './stores/socket';
 import { AddClient, Message, MessageType } from 'types';
 
-const URL = 'http://localhost:5000';
+const URL = import.meta.env.VITE_SOCKET_URL;
 const socketStore = useSocketStore();
 const socket = io(URL, {
   auth: {

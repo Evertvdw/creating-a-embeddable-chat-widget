@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
-const secret = 'alksjd;kl3lkrjtokensfklhklkef';
+const secret = process.env.JWT_SECRET || 'alksjd;kl3lkrjtokensfklhklkef';
 
 export default function (db: Database) {
   router.post('/login', async (req, res) => {

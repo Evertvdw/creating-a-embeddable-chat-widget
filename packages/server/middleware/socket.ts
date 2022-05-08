@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { Database } from '../types';
 
-const secret = 'alksjd;kl3lkrjtokensfklhklkef';
+const secret = process.env.JWT_SECRET || 'alksjd;kl3lkrjtokensfklhklkef';
 
 export default function (io: Server, db: Database) {
   // Verify jwt token on socket connection

@@ -14,6 +14,8 @@ import serveStatic from 'serve-static';
 import history from 'connect-history-api-fallback';
 
 const app = express();
+const port = process.env.PORT || 5000;
+
 app.use(helmet());
 app.use(
   cors({
@@ -24,8 +26,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use(history());
-app.use(serveStatic('./../../dist/widget'));
-app.use(serveStatic('./../../dist/portal'));
+if (process.env.APP_ENV === 'production') {
+  app.use(serveStatic('../widget'));
+  app.use(serveStatic('../portal'));
+}
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -51,12 +55,16 @@ let db: Database;
   try {
     db = await initDB();
 
+    if (process.env.APP_ENV === 'production' && !process.env.JWT_SECRET) {
+      throw new Error('Should provide JWT_SECRET env variable');
+    }
+
     socketMiddleware(io, db);
     app.use('/auth', authRoutes(db));
 
-    server.listen(5000, () => {
+    server.listen(port, () => {
       console.log(
-        `Server started on port ${5000} at ${new Date().toLocaleString()}`
+        `Server started on port ${port} at ${new Date().toLocaleString()}`
       );
     });
   } catch (err) {

@@ -2,8 +2,7 @@ import { boot } from 'quasar/wrappers';
 import io from 'socket.io-client';
 import { useClientStore } from 'src/stores/client';
 
-const URL = 'http://localhost:5000';
-const socket = io(URL, {
+const socket = io(import.meta.env.VITE_SOCKET_URL, {
   autoConnect: false,
 });
 
