@@ -30,7 +30,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(history());
 if (process.env.APP_ENV === 'production') {
-  app.use(serveStatic(path.join(__dirname, './../../dist/widget')));
+  app.use(
+    serveStatic(path.join(__dirname, './../../dist/widget'), {
+      setHeaders: (res) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+      },
+    })
+  );
   app.use(serveStatic(path.join(__dirname, './../../dist/portal')));
 }
 
