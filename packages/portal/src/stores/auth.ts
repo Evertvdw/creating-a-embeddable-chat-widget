@@ -20,14 +20,17 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(payload: { email: string; password: string }) {
       this.status = AuthStatus.loading;
-      const response = await fetch('http://localhost:5000/auth/login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SOCKET_URL}/auth/login`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }
+      );
       console.log('[DEBUG] login response', response.ok, response.status);
       if (response.ok) {
         this.status = AuthStatus.success;
@@ -41,9 +44,12 @@ export const useAuthStore = defineStore('auth', {
       } else this.status = AuthStatus.error;
     },
     async refresh_token() {
-      const response = await fetch('http://localhost:5000/auth/refresh_token', {
-        credentials: 'include',
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_SOCKET_URL}/auth/refresh_token`,
+        {
+          credentials: 'include',
+        }
+      );
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem('jwt', token);
