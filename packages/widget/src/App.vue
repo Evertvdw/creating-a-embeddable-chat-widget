@@ -1,23 +1,26 @@
 <template>
   <div class="chat-widget">
     Chat-widget
-    <div>Name: {{ socketStore.name }}</div>
+    <div>Name: {{ name }}</div>
     Messages:
     <div class="messages">
       <div v-for="(message, index) in socketStore.messages" :key="index">
         {{ message.message }}
       </div>
     </div>
-    <input v-model="text" type="text" />
     <button @click="sendMessage">Send</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import io from 'socket.io-client';
+import { AddClient, Message, MessageType } from 'types';
 import { onUnmounted, ref, watch } from 'vue';
 import { useSocketStore } from './stores/socket';
-import { AddClient, Message, MessageType } from 'types';
+
+const props = defineProps<{
+  name: string;
+}>();
 
 const URL = import.meta.env.VITE_SOCKET_URL;
 const socketStore = useSocketStore();
@@ -26,6 +29,7 @@ const socket = io(URL, {
     clientID: socketStore.id,
   },
 });
+
 watch(
   () => socketStore.id,
   (val) => {
@@ -35,14 +39,10 @@ watch(
   }
 );
 
-if (!socketStore.name) {
-  socketStore.setName();
-}
-
 const text = ref('');
 
 const addClient: AddClient = {
-  name: socketStore.name,
+  name: props.name,
 };
 
 // This will be called on the initial connection and also on reconnects
@@ -78,7 +78,28 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
+@import url('quasar/dist/quasar.prod.css');
+
 .chat-widget {
+  --q-primary: #1976d2;
+  --q-secondary: #26a69a;
+  --q-accent: #9c27b0;
+  --q-positive: #21ba45;
+  --q-negative: #c10015;
+  --q-info: #31ccec;
+  --q-warning: #f2c037;
+  --q-dark: #1d1d1d;
+  --q-dark-page: #121212;
+  --q-transition-duration: 0.3s;
+  --animate-duration: 0.3s;
+  --animate-delay: 0.3s;
+  --animate-repeat: 1;
+  --q-size-xs: 0;
+  --q-size-sm: 600px;
+  --q-size-md: 1024px;
+  --q-size-lg: 1440px;
+  --q-size-xl: 1920px;
+
   background-color: #eeeeee;
   color: #111111;
 }

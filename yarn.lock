@@ -34,11 +34,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@faker-js/faker@^6.1.2":
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-6.1.2.tgz#7093ea65e6d78eae388918a46968c083366bd621"
-  integrity sha512-QSvmexHCxeRUk1/yKmoEDaWB5Hohjvtim5g2JJwy8S/l0L4b3y/GxSpE6vN4SBoVGGahEQW21uqyRr7EofI35A==
-
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"
@@ -3355,6 +3350,11 @@ quasar@^2.6.0:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.6.6.tgz#00bc2acbe5ef2492f7b959f539fd2e469e7082a6"
   integrity sha512-rXoGZROOXVutQX14l/ys0te/NrgQ754krI0Vz52pBXdznyS+dTL6AgGpr3JMwffoxpxhQyedrL2jOAMpq+Jsgw==
+
+quasar@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.7.0.tgz#f106818bd08e18b3289ec9b92b33c8f6a5cb497c"
+  integrity sha512-UjSWhEtHku1lIP7swRxRj15jRaiH96Nsyrhs/mPcQQXskuDpl5h5eQOFGKHNjgAbVvxXqQTk4aEE78N23bpK/A==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
