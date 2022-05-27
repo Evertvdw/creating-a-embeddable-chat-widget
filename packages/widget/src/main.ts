@@ -1,16 +1,28 @@
-import ChatWidget from './App.vue';
+import App from './App.vue';
 import { createPinia } from 'pinia';
 import { createApp, defineCustomElement, h, getCurrentInstance } from 'vue';
 import { Quasar } from 'quasar';
+import io from 'socket.io-client';
+import { useSocketStore } from './stores/socket';
 
-const app = createApp(ChatWidget);
+const app = createApp(App);
 
 app.use(createPinia());
 app.use(Quasar, { plugins: {} });
 
+const URL = import.meta.env.VITE_SOCKET_URL;
+const socketStore = useSocketStore();
+const socket = io(URL, {
+  auth: {
+    clientID: socketStore.id,
+  },
+});
+
+app.provide('socket', socket);
+
 const chatWidget = defineCustomElement({
-  render: () => h(ChatWidget),
-  styles: ChatWidget.styles,
+  render: () => h(App),
+  styles: App.styles,
   props: {},
   setup() {
     const instance = getCurrentInstance();

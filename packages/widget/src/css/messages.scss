@@ -1,0 +1,120 @@
+$chat-message-spacing: 12px;
+$chat-send-color: rgb(224, 224, 224);
+$chat-received-color: rgb(129, 199, 132);
+
+.chat-messages {
+  margin-bottom: 16px;
+  width: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(232, 232, 232, 0.653);
+
+  &-top {
+    height: 48px;
+    background-color: $primary;
+    border-bottom: 1px solid rgb(219, 219, 219);
+  }
+
+  &-content {
+    height: min(70vh, 300px);
+    background-color: rgb(247, 247, 247);
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-end;
+    min-height: 100%;
+    padding-bottom: $chat-message-spacing;
+
+    .message-send + .message-received,
+    .message-received:first-child {
+      margin-top: $chat-message-spacing;
+
+      .message-content {
+        border-top-left-radius: 0;
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -8px;
+          width: 0;
+          height: 0;
+          border-right: none;
+          border-left: 8px solid transparent;
+          border-top: 8px solid $chat-received-color;
+        }
+      }
+    }
+
+    .message-received + .message-send,
+    .message-send:first-child {
+      margin-top: $chat-message-spacing;
+
+      .message-content {
+        border-top-right-radius: 0;
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -8px;
+          width: 0;
+          height: 0;
+          border-left: none;
+          border-right: 8px solid transparent;
+          border-top: 8px solid $chat-send-color;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    border-top: 1px solid rgb(219, 219, 219);
+  }
+}
+
+.message {
+  &-content {
+    padding: 8px;
+    padding-right: 64px;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    font-size: 14px;
+  }
+
+  &-send {
+    margin: 1px 16px 1px 32px;
+  }
+
+  &-send &-content {
+    background-color: $chat-send-color;
+    float: right;
+  }
+
+  &-received {
+    margin: 1px 32px 1px 16px;
+  }
+
+  &-received &-content {
+    background-color: $chat-received-color;
+  }
+
+  &-timestamp {
+    font-size: 11px;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    line-height: 14px;
+    color: #3f3f3f;
+    text-align: end;
+  }
+}

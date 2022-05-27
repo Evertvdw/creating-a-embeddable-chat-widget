@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@quasar/extras": "^1.14.0",
     "pinia": "^2.0.13",
     "quasar": "^2.7.0",
     "socket.io-client": "^4.4.1",

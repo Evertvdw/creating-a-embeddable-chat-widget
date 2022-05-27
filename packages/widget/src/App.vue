@@ -1,34 +1,32 @@
 <template>
   <div class="chat-widget">
-    Chat-widget
-    <div>Name: {{ name }}</div>
-    Messages:
-    <div class="messages">
-      <div v-for="(message, index) in socketStore.messages" :key="index">
-        {{ message.message }}
-      </div>
-    </div>
-    <button @click="sendMessage">Send</button>
+    <ChatMessages v-if="!mainStore.collapsed" />
+    <q-btn
+      size="lg"
+      round
+      color="primary"
+      :icon="matChat"
+      @click="mainStore.toggleCollapsed"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import io from 'socket.io-client';
-import { AddClient, Message, MessageType } from 'types';
-import { onUnmounted, ref, watch } from 'vue';
+import { AddClient } from 'types';
+import { onUnmounted, watch, inject } from 'vue';
 import { useSocketStore } from './stores/socket';
+import { matChat } from '@quasar/extras/material-icons';
+import { useMainStore } from './stores/main';
+import ChatMessages from './components/ChatMessages.vue';
+import { Socket } from 'socket.io-client';
 
+const socket = inject('socket') as Socket;
 const props = defineProps<{
   name: string;
 }>();
 
-const URL = import.meta.env.VITE_SOCKET_URL;
 const socketStore = useSocketStore();
-const socket = io(URL, {
-  auth: {
-    clientID: socketStore.id,
-  },
-});
+const mainStore = useMainStore();
 
 watch(
   () => socketStore.id,
@@ -38,8 +36,6 @@ watch(
     };
   }
 );
-
-const text = ref('');
 
 const addClient: AddClient = {
   name: props.name,
@@ -62,16 +58,6 @@ socket.onAny((event: string, ...args) => {
   console.log(`[DEBUG] ${event}`, args);
 });
 
-function sendMessage() {
-  const message: Message = {
-    time: Date.now(),
-    message: text.value,
-    type: MessageType.Client,
-  };
-  socket.emit('client:message', message);
-  text.value = '';
-}
-
 onUnmounted(() => {
   socket.off('connect_error');
 });
@@ -79,6 +65,7 @@ onUnmounted(() => {
 
 <style lang="scss">
 @import url('quasar/dist/quasar.prod.css');
+@import './css/app.scss';
 
 .chat-widget {
   --q-primary: #1976d2;
@@ -100,11 +87,16 @@ onUnmounted(() => {
   --q-size-lg: 1440px;
   --q-size-xl: 1920px;
 
-  background-color: #eeeeee;
-  color: #111111;
-}
+  *,
+  :after,
+  :before {
+    box-sizing: border-box;
+  }
 
-.messages {
-  padding: 16px;
+  font-family: -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
 }
 </style>

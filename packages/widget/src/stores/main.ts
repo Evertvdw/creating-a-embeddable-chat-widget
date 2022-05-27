@@ -2,12 +2,11 @@ import { defineStore } from 'pinia';
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    hello: 'Hi there!',
+    collapsed: true,
   }),
-  getters: {
-    //
-  },
   actions: {
-    //
+    toggleCollapsed() {
+      this.collapsed = !this.collapsed;
+    },
   },
 });

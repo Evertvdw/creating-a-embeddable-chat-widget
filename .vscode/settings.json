@@ -8,5 +8,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.associations": {
     "*.env.*": "env"
-  }
+  },
+  "editor.tabSize": 2
 }
