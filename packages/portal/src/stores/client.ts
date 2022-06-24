@@ -30,6 +30,12 @@ export const useClientStore = defineStore('client', {
         client.connected = payload.status;
       }
     },
+    SOCKET_client_typing(payload: { id: string; text: string }) {
+      const client = this.clients.find((c) => c.id === payload.id);
+      if (client) {
+        client.typing = payload.text;
+      }
+    },
     setClientSelected(payload: Client) {
       this.clientSelected = payload;
     },

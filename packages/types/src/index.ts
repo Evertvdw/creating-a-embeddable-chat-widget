@@ -5,6 +5,7 @@ export interface AddClient {
 export interface Client extends AddClient {
   id: string;
   connected: boolean;
+  typing: string;
   messages: Message[];
 }
 

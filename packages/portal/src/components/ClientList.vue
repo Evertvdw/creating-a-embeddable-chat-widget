@@ -17,7 +17,10 @@
 
       <q-item-section>
         <q-item-label>{{ client.name }}</q-item-label>
-        <q-item-label caption lines="1">{{ client.id }}</q-item-label>
+        <q-item-label caption lines="2">
+          <span v-if="client.typing"> User is typing <IsTyping /> </span>
+          <span v-else>{{ client.id }}</span>
+        </q-item-label>
       </q-item-section>
 
       <q-item-section side>
@@ -29,6 +32,7 @@
 
 <script setup lang="ts">
 import { useClientStore } from 'src/stores/client';
+import IsTyping from './IsTyping.vue';
 
 const clientStore = useClientStore();
 </script>

@@ -17,6 +17,7 @@ export default function (io: Server, socket: Socket, db: Database) {
     } else {
       client = {
         ...data,
+        typing: '',
         messages: [],
         id: socket.clientID,
         connected: true,
@@ -40,11 +41,24 @@ export default function (io: Server, socket: Socket, db: Database) {
       });
     });
 
+    socket.on('client:typing', (text: string) => {
+      client.typing = text;
+      io.to('admins').emit('admin:client_typing', {
+        id: client.id,
+        text,
+      });
+    });
+
     socket.on('disconnect', async () => {
       const matchingSockets = await io.in(socket.clientID).allSockets();
       const isDisconnected = matchingSockets.size === 0;
       if (isDisconnected) {
         client.connected = false;
+        client.typing = '';
+        io.to('admins').emit('admin:client_typing', {
+          id: client.id,
+          status: '',
+        });
         io.to('admins').emit('admin:client_status', {
           id: client.id,
           status: false,

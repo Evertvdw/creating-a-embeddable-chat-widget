@@ -64,6 +64,10 @@ watch(
   }
 );
 
+watch(text, (val) => {
+  socket.emit('client:typing', val);
+});
+
 function sendMessage() {
   const message: Message = {
     time: Date.now(),

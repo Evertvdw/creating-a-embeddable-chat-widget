@@ -11,6 +11,9 @@
       >
         {{ message.message }}
       </div>
+      <div v-if="clientStore.clientSelected.typing">
+        {{ clientStore.clientSelected.typing }} <IsTyping />
+      </div>
     </div>
     <div class="q-pa-md row items-center">
       <q-input
@@ -37,6 +40,7 @@ import { ref } from 'vue';
 import { useClientStore } from 'src/stores/client';
 import { socket } from 'src/boot/socket';
 import { Message, MessageType } from 'types';
+import IsTyping from './IsTyping.vue';
 
 const clientStore = useClientStore();
 const text = ref('');
