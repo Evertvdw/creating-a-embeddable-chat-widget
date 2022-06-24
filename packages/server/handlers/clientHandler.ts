@@ -27,6 +27,7 @@ export default function (io: Server, socket: Socket, db: Database) {
         ...data,
         typing: '',
         messages: [],
+        adminsTyping: {},
         id: socket.clientID,
         connected: true,
       };

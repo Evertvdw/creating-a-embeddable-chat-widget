@@ -5,6 +5,7 @@ export interface Client extends AddClient {
     id: string;
     connected: boolean;
     typing: string;
+    adminsTyping: Record<string, boolean>;
     messages: Message[];
 }
 export interface Admin extends AdminPublic {

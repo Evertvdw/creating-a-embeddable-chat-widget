@@ -37,8 +37,15 @@ export default function (io: Server, socket: Socket, db: Database) {
       ({ id, typing }: { id: string; typing: boolean }) => {
         const client = db.clients.findOne({ id });
         if (client) {
-          // Send message to the client
-          socket.to(client.id).emit('client:admin_typing', typing);
+          if (typing) {
+            client.adminsTyping[admin.email] = true;
+            socket.to(client.id).emit('client:admin_typing', typing);
+          } else {
+            delete client.adminsTyping[admin.email];
+            if (!Object.keys(client.adminsTyping).length) {
+              socket.to(client.id).emit('client:admin_typing', typing);
+            }
+          }
         }
       }
     );
