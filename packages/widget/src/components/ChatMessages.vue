@@ -28,7 +28,7 @@
             </span>
           </div>
         </div>
-        <div v-if="socketStore.admin_typing" class="message-received">
+        <div v-if="socketStore.adminTyping" class="message-received">
           <div class="message-content">
             <IsTyping />
           </div>
@@ -85,7 +85,7 @@ watch(text, (val) => {
 });
 
 watch(
-  () => socketStore.admin_typing,
+  () => socketStore.adminTyping,
   () => {
     scrollToBottom();
   }

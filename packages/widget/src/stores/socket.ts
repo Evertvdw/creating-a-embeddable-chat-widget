@@ -5,7 +5,7 @@ export const useSocketStore = defineStore('socket', {
   state: () => ({
     messages: [] as Message[],
     id: localStorage.getItem('clientID'),
-    admin_typing: false,
+    adminTyping: false,
     adminList: [] as AdminPublic[],
   }),
   actions: {
@@ -20,7 +20,7 @@ export const useSocketStore = defineStore('socket', {
       this.id = payload;
     },
     SOCKET_admin_typing(payload: boolean) {
-      this.admin_typing = payload;
+      this.adminTyping = payload;
     },
     SOCKET_admin_list(payload: AdminPublic[]) {
       this.adminList = payload;
