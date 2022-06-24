@@ -8,6 +8,14 @@ export default function (io: Server, socket: Socket, db: Database) {
 
     socket.emit('client:id', socket.clientID);
 
+    // Emit a list of admins to the client so it can views it's name and image
+    socket.emit(
+      'client:admin_list',
+      db.admins.find().map((admin) => {
+        return { name: admin.name, image: admin.image };
+      })
+    );
+
     let client: Client;
     const DBClient = db.clients.findOne({ id: socket.clientID });
     if (DBClient) {

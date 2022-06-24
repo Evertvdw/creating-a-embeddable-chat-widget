@@ -73,6 +73,7 @@ function sendMessage() {
       time: Date.now(),
       message: text.value,
       type: MessageType.Admin,
+      adminName: clientStore.self?.name,
     };
     socket.emit('admin:message', {
       id: clientStore.clientSelected.id,

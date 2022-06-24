@@ -9,12 +9,15 @@ export interface Client extends AddClient {
   messages: Message[];
 }
 
-export interface Admin {
-  name: string;
+export interface Admin extends AdminPublic {
   email: string;
-  image: string;
   hash: string;
   connected?: boolean;
+}
+
+export interface AdminPublic {
+  name: string;
+  image: string;
 }
 
 export enum MessageType {

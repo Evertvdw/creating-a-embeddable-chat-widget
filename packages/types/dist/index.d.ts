@@ -7,12 +7,14 @@ export interface Client extends AddClient {
     typing: string;
     messages: Message[];
 }
-export interface Admin {
-    name: string;
+export interface Admin extends AdminPublic {
     email: string;
-    image: string;
     hash: string;
     connected?: boolean;
+}
+export interface AdminPublic {
+    name: string;
+    image: string;
 }
 export declare enum MessageType {
     Admin = "admin",

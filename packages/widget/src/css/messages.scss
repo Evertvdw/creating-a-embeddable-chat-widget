@@ -1,4 +1,5 @@
-$chat-message-spacing: 12px;
+$chat-message-spacing: 3px;
+$chat-message-group-spacing: 12px;
 $chat-send-color: rgb(224, 224, 224);
 $chat-received-color: rgb(129, 199, 132);
 
@@ -30,46 +31,44 @@ $chat-received-color: rgb(129, 199, 132);
     position: relative;
     justify-content: flex-end;
     min-height: 100%;
-    padding-bottom: $chat-message-spacing;
+    padding-bottom: $chat-message-group-spacing;
 
-    .message-send + .message-received,
-    .message-received:first-child {
-      margin-top: $chat-message-spacing;
+    .message-first {
+      margin-top: $chat-message-group-spacing;
 
-      .message-content {
-        border-top-left-radius: 0;
+      &.message-received {
+        .message-content {
+          border-top-left-radius: 0;
 
-        &:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -8px;
-          width: 0;
-          height: 0;
-          border-right: none;
-          border-left: 8px solid transparent;
-          border-top: 8px solid $chat-received-color;
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-right: none;
+            border-left: 8px solid transparent;
+            border-top: 8px solid $chat-received-color;
+          }
         }
       }
-    }
 
-    .message-received + .message-send,
-    .message-send:first-child {
-      margin-top: $chat-message-spacing;
+      &.message-send {
+        .message-content {
+          border-top-right-radius: 0;
 
-      .message-content {
-        border-top-right-radius: 0;
-
-        &:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: -8px;
-          width: 0;
-          height: 0;
-          border-left: none;
-          border-right: 8px solid transparent;
-          border-top: 8px solid $chat-send-color;
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 0;
+            height: 0;
+            border-left: none;
+            border-right: 8px solid transparent;
+            border-top: 8px solid $chat-send-color;
+          }
         }
       }
     }
@@ -92,7 +91,7 @@ $chat-received-color: rgb(129, 199, 132);
   }
 
   &-send {
-    margin: 1px 16px 1px 32px;
+    margin: $chat-message-spacing 16px $chat-message-spacing 32px;
   }
 
   &-send &-content {
@@ -101,7 +100,7 @@ $chat-received-color: rgb(129, 199, 132);
   }
 
   &-received {
-    margin: 1px 32px 1px 16px;
+    margin: $chat-message-spacing 32px $chat-message-spacing 16px;
   }
 
   &-received &-content {

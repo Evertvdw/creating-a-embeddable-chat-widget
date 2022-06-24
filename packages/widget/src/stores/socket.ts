@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
-import { Message } from 'types';
+import { AdminPublic, Message } from 'types';
 
 export const useSocketStore = defineStore('socket', {
   state: () => ({
     messages: [] as Message[],
     id: localStorage.getItem('clientID'),
     admin_typing: false,
+    adminList: [] as AdminPublic[],
   }),
   actions: {
     SOCKET_message(payload: Message) {
@@ -20,6 +21,9 @@ export const useSocketStore = defineStore('socket', {
     },
     SOCKET_admin_typing(payload: boolean) {
       this.admin_typing = payload;
+    },
+    SOCKET_admin_list(payload: AdminPublic[]) {
+      this.adminList = payload;
     },
   },
 });

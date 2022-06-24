@@ -9,8 +9,18 @@
           :class="{
             'message-send': message.type === MessageType.Client,
             'message-received': message.type === MessageType.Admin,
+            'message-first': firstMessage(index, message),
           }"
         >
+          <q-avatar
+            v-if="
+              message.type === MessageType.Admin && firstMessage(index, message)
+            "
+            size="32px"
+            class="q-mr-md message-avatar"
+          >
+            <img :src="adminAvatar(message)" />
+          </q-avatar>
           <div class="message-content">
             {{ message.message }}
             <span class="message-timestamp">
@@ -80,6 +90,24 @@ watch(
     scrollToBottom();
   }
 );
+
+function firstMessage(index: number, message: Message) {
+  if (index > 0) {
+    return (
+      socketStore.messages[index - 1].type !== message.type ||
+      socketStore.messages[index - 1].adminName !== message.adminName
+    );
+  }
+  return true;
+}
+
+function adminAvatar(message: Message) {
+  const admin = socketStore.adminList.find(
+    (admin) => admin.name === message.adminName
+  );
+  if (admin) return admin.image;
+  else return '';
+}
 
 function sendMessage() {
   const message: Message = {
