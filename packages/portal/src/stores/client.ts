@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia';
-import { Client, Message } from 'types';
+import { Admin, Client, Message } from 'types';
 
 export const useClientStore = defineStore('client', {
   state: () => ({
     clients: [] as Client[],
     clientSelected: null as Client | null,
+    self: null as Admin | null,
   }),
   actions: {
+    SOCKET_self(payload: Admin) {
+      this.self = payload;
+    },
     SOCKET_list(payload: Client[]) {
       this.clients = payload;
       // When the list is updated the clientSelected loses it reactivity

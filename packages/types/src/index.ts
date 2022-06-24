@@ -12,6 +12,7 @@ export interface Client extends AddClient {
 export interface Admin {
   name: string;
   email: string;
+  image: string;
   hash: string;
   connected?: boolean;
 }

@@ -13,6 +13,7 @@ export const useAuthStore = defineStore('auth', {
     token: localStorage.getItem('jwt') || '',
     status: AuthStatus.init,
     urlAfterLogin: '/clients',
+    email: localStorage.getItem('email') || '',
   }),
   getters: {
     isAuthenticated: (state) => state.status === AuthStatus.success,
@@ -38,6 +39,8 @@ export const useAuthStore = defineStore('auth', {
         const token = await response.text();
         localStorage.setItem('jwt', token);
         this.token = token;
+        localStorage.setItem('email', payload.email);
+        this.email = payload.email;
         socket.io.opts.query = { token };
 
         console.log('[DEBUG]: login response', token);

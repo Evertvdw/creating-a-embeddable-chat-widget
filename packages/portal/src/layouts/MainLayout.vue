@@ -11,6 +11,10 @@
           @click="toggleLeftDrawer"
         />
 
+        <q-avatar v-if="clientStore.self">
+          <img :src="clientStore.self.image" />
+        </q-avatar>
+
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
         <q-btn outline @click="logout"> Logout </q-btn>
@@ -33,9 +37,11 @@ import ClientList from 'src/components/ClientList.vue';
 import { useAuthStore } from 'src/stores/auth';
 import { socket } from 'src/boot/socket';
 import { useRouter } from 'vue-router';
+import { useClientStore } from 'src/stores/client';
 
 const leftDrawerOpen = ref(false);
 const authStore = useAuthStore();
+const clientStore = useClientStore();
 const router = useRouter();
 
 function logout() {

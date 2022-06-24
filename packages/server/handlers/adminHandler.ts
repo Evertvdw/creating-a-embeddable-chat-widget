@@ -2,14 +2,14 @@ import { Socket, Server } from 'socket.io';
 import { Database, Message } from '../types';
 
 export default function (io: Server, socket: Socket, db: Database) {
-  socket.on('admin:add', (name: string) => {
-    socket.join('admins');
-
-    const admin = db.admins.findOne({ name });
+  socket.on('admin:add', (email: string) => {
+    const admin = db.admins.findOne({ email });
 
     if (!admin) return socket.disconnect(true);
     admin.connected = true;
 
+    socket.join('admins');
+    socket.emit('admin:self', admin);
     socket.emit('admin:list', db.clients.find());
 
     socket.on(

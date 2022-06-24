@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import io from 'socket.io-client';
+import { useAuthStore } from 'src/stores/auth';
 import { useClientStore } from 'src/stores/client';
 
 const socket = io(import.meta.env.VITE_SOCKET_URL, {
@@ -8,10 +9,11 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
 
 export default boot(({ store }) => {
   const clientStore = useClientStore(store);
+  const authStore = useAuthStore(store);
 
   // This will be called on the initial connection and also on reconnects
   socket.on('connect', () => {
-    socket.emit('admin:add', 'Evert');
+    socket.emit('admin:add', authStore.email);
   });
 
   socket.onAny((event: string, ...args) => {
