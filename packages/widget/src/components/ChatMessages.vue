@@ -18,6 +18,11 @@
             </span>
           </div>
         </div>
+        <div v-if="socketStore.admin_typing" class="message-received">
+          <div class="message-content">
+            <IsTyping />
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -42,6 +47,7 @@ import { Message, MessageType } from 'types';
 import { inject, nextTick, ref, watch } from 'vue';
 import { useSocketStore } from '../stores/socket';
 import { date } from 'quasar';
+import IsTyping from './IsTyping.vue';
 
 const text = ref('');
 const socket = inject('socket') as Socket;
@@ -67,6 +73,13 @@ watch(
 watch(text, (val) => {
   socket.emit('client:typing', val);
 });
+
+watch(
+  () => socketStore.admin_typing,
+  () => {
+    scrollToBottom();
+  }
+);
 
 function sendMessage() {
   const message: Message = {

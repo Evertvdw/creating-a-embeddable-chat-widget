@@ -32,6 +32,17 @@ export default function (io: Server, socket: Socket, db: Database) {
       }
     );
 
+    socket.on(
+      'admin:typing',
+      ({ id, typing }: { id: string; typing: boolean }) => {
+        const client = db.clients.findOne({ id });
+        if (client) {
+          // Send message to the client
+          socket.to(client.id).emit('client:admin_typing', typing);
+        }
+      }
+    );
+
     socket.on('disconnect', () => {
       admin.connected = false;
     });

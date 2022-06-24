@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useClientStore } from 'src/stores/client';
 import { socket } from 'src/boot/socket';
 import { Message, MessageType } from 'types';
@@ -44,6 +44,28 @@ import IsTyping from './IsTyping.vue';
 
 const clientStore = useClientStore();
 const text = ref('');
+
+watch(text, (val) => {
+  if (clientStore.clientSelected) {
+    socket.emit('admin:typing', {
+      id: clientStore.clientSelected.id,
+      typing: Boolean(val),
+    });
+  }
+});
+
+// When we switch clients, update typing status and reset text
+watch(
+  () => clientStore.clientSelected,
+  (newVal, oldVal) => {
+    text.value = '';
+    if (oldVal)
+      socket.emit('admin:typing', {
+        id: oldVal.id,
+        typing: false,
+      });
+  }
+);
 
 function sendMessage() {
   if (clientStore.clientSelected) {
